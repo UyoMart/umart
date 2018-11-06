@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umart/auth.dart';
+import 'package:umart/live_shopping_scan_page.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -34,6 +35,11 @@ class _HomePageState extends State<HomePage> {
     widget.callBackSignOut();
   }
 
+  void openScanScreen(){
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LiveShopping()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -43,6 +49,7 @@ class _HomePageState extends State<HomePage> {
             child: new Column(
               children: <Widget>[
                 new Text("Welcome $id"),
+                new RaisedButton(onPressed: openScanScreen,child: new Text("live shopping"),),
                 new RaisedButton(onPressed: logOut, child: new Text("Log Out"),)
               ],
             )

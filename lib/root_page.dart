@@ -41,8 +41,7 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void _signedOut(){
-
+  void _signedOut() {
     setState(() {
       _authStatus = AuthStatus.notSignedIn;
     });
@@ -59,7 +58,7 @@ class _RootPageState extends State<RootPage> {
     } else {
       return new Scaffold(
           body: new HomePage(
-              auth: widget.auth,
+            auth: widget.auth,
             callBackSignOut: _signedOut,
           )
 
