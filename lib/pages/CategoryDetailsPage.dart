@@ -24,6 +24,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         //appBar: _getBar(),
+        resizeToAvoidBottomPadding: false,
         floatingActionButton: new FloatingActionButton(
           onPressed: _onAddToCartFabClicked,
           child: new Icon(Icons.add_shopping_cart),

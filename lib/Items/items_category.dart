@@ -42,7 +42,7 @@ class _CategoryItemState extends State<CategoryItem> {
                         item.imageUrl,
                       ),
                       fit: BoxFit.cover),
-                  color: Colors.grey),
+                  color: Colors.grey[400]),
             ),
           ),
           new Column(
@@ -96,20 +96,36 @@ class Items {
 
   final String itemDescrption;
 
+  final String categoryType;
+
   Items._(
       {this.imageUrl,
       this.itemName,
       this.priceTag,
       this.itemId,
-      this.itemDescrption});
+      this.itemDescrption,
+      this.categoryType});
 
   factory Items.fromJson(Map<String, dynamic> json) {
+    var price;
+    if (json['price'] == null) {
+      price = 200;
+    } else {
+      price = int.parse(json['price'].toString());
+      assert(price is int);
+      print(price.toString());
+    }
+//    print("PRICE ???????????>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + json['price']);
     return new Items._(
-        imageUrl: "https://i.imgur.com/8XpQ6yP.jpg",
+        imageUrl: json['image'] != null
+            ? json['image']
+            : "https://i.imgur.com/8XpQ6yP.jpg",
         itemName: json['name'],
-        priceTag: 200,
+        priceTag: price,
         itemId: json['id'],
-        itemDescrption:
-            "This is the product decription, as you can see, now get back");
+        itemDescrption: json['description'] == null
+            ? json['description']
+            : "This is the product decription, as you can see, now get back",
+        categoryType: json['category']);
   }
 }

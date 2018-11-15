@@ -42,22 +42,6 @@ class HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    widget.auth.getUserId().then((onValue) {
-      setState(() {
-        id = onValue;
-      });
-    });
-  }
-
-  void logOut() async {
-    widget.auth.logUserOut();
-    widget.callBackSignOut();
-  }
-
-  @override
   Widget build(BuildContext context) {
 //    return new MaterialApp(
 //        debugShowCheckedModeBanner: false,
@@ -71,13 +55,13 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       appBar: new AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.brown,
         title: appBarTitle,
         bottom: _getSearchBar(),
         actions: <Widget>[
           //_cartIcon(),
           new IconButton(
-            padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+            padding: EdgeInsets.only(left: 0.0, top: 4.0, bottom: 4.0),
             icon: _cartIcon(),
             onPressed: () {
               new Future(_onCartButtonPressed(2));
@@ -90,13 +74,29 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  //Returns the widget according to the selected drawer item
   initCategoryTypeCallBack(CategoryTypeCallback categoryTypeCallback) {
     this.categoryTypeCallBack = categoryTypeCallback;
   }
 
   initSearchCallback(SearchCallback searchCallback) {
     this.searchCallback = searchCallback;
+  }
+
+  //Returns the widget according to the selected drawer item
+  @override
+  void initState() {
+    super.initState();
+
+    widget.auth.getUserId().then((onValue) {
+      setState(() {
+        id = onValue;
+      });
+    });
+  }
+
+  void logOut() async {
+    widget.auth.logUserOut();
+    widget.callBackSignOut();
   }
 
   Widget _cartIcon() {
@@ -119,18 +119,19 @@ class HomePageState extends State<HomePage> {
       child: new Column(
         children: <Widget>[
           new Container(
-              alignment: Alignment.topCenter,
-              width: 60.0,
-              height: 60.0,
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 16.0),
-              decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 2.0, color: Colors.grey),
-                  color: Colors.blue,
-                  image: new DecorationImage(
-                      fit: BoxFit.fill,
-                      image: new NetworkImage(
-                          "https://i.imgur.com/BoN9kdC.png")))),
+            alignment: Alignment.topCenter,
+            width: 60.0,
+            height: 60.0,
+            margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 16.0),
+//              decoration: new BoxDecoration(
+//                  shape: BoxShape.circle,
+//                  border: Border.all(width: 2.0, color: Colors.grey),
+//                  color: Colors.blue,
+//                  image: new DecorationImage(
+//                      fit: BoxFit.fill,
+//                      image: new NetworkImage(
+//                          "https://i.imgur.com/BoN9kdC.png")))
+          ),
           new Text(
             userEmailAddress,
             style: new TextStyle(
@@ -179,8 +180,12 @@ class HomePageState extends State<HomePage> {
       leading: new Icon(Icons.list),
       title: new Text("Categories"),
       initiallyExpanded: true,
-      children: _getListTilesCategory(
-          <String>["Food and Drinks", "Office Supplies", "Cooking utensils"]),
+      children: _getListTilesCategory(<String>[
+        "Food/Drinks Items",
+        "Phones/Tablets",
+        "Electronic Apliances",
+        "Skin/Body Care"
+      ]),
     ));
 
     navDrawerItem.add(ListTile(
@@ -205,7 +210,7 @@ class HomePageState extends State<HomePage> {
       case 0:
         return new categories.CategoriesPage(
           homePageState: this,
-          categoryType: categoryType,
+          categoryType: "Home",
         );
       case 1:
         return new categories.CategoriesPage(
@@ -245,12 +250,12 @@ class HomePageState extends State<HomePage> {
           _onSelectedItem(3);
         },
       ),
-      new ListTile(
-        title: new Text("Online Shopping"),
-        onTap: () {
-          Navigator.of(context).pop();
-        },
-      ),
+//      new ListTile(
+//        title: new Text("Online Shopping"),
+//        onTap: () {
+//          Navigator.of(context).pop();
+//        },
+//      ),
     ];
     return list;
   }
@@ -258,10 +263,10 @@ class HomePageState extends State<HomePage> {
   //Returns the drawer nav widget
   PreferredSizeWidget _getSearchBar() {
     return new PreferredSize(
-        preferredSize: const Size.fromHeight(65.0),
+        preferredSize: const Size.fromHeight(60.0),
         child: new Container(
-          color: Colors.deepPurple,
-          height: 65.0,
+          color: Colors.brown,
+          height: 60.0,
           alignment: Alignment.center,
           margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
           padding: EdgeInsets.all(0.0),
@@ -341,6 +346,10 @@ class HomePageState extends State<HomePage> {
       _selectedDrawerIndex = index;
       switch (index) {
         case 0:
+          this.categoryType = "Home";
+          if (categoryTypeCallBack != null) {
+            categoryTypeCallBack("Home");
+          }
           appBarTitle = new Text("Home");
           break;
         case 1:
@@ -364,9 +373,9 @@ class HomePageState extends State<HomePage> {
   _setUpSearchQuery() {
     _searchQuery.addListener(() {
       if (_searchQuery.text.isEmpty) {
-        setState(() {
-          //TODO: Show toast with message "Search cant be empty"
-        });
+//        setState(() {
+//          //TODO: Show toast with message "Search cant be empty"
+//        });
       } else {
         setState(() {
           searchText = _searchQuery.text;

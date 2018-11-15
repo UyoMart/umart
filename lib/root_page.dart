@@ -60,6 +60,7 @@ class _RootPageState extends State<RootPage> {
         );
     } else {
       return new Scaffold(
+          resizeToAvoidBottomPadding: false,
           body: new HomePage(
             5,
             auth: widget.auth,

@@ -90,7 +90,7 @@ class MyCartItemState extends State<MyCartItem> {
           style: new TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 22.0,
-              color: Colors.deepPurpleAccent),
+              color: Colors.blueGrey),
         ),
       ],
     );
@@ -198,4 +198,8 @@ class MyCart {
 
   MyCart(
       this.imageUrl, this.itemName, this.amount, this.itemCount, this.itemId);
+
+  factory MyCart.fromJson(Map<String, dynamic> json) {
+    return MyCart(json["id"], json["product_name"], null, null, null);
+  }
 }

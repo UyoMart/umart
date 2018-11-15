@@ -27,13 +27,13 @@ class CategoriesPageState extends State<CategoriesPage> {
 
   @override
   void initState() {
-    _fetchData(widget.categoryType, searchText: "");
+    _fetchData(widget.categoryType, searchText: null);
     widget.homePageState
         .initSearchCallback((String searchText, String categoryType) {
       _fetchData(categoryType, searchText: searchText);
     });
     widget.homePageState.initCategoryTypeCallBack((String categoryType) {
-      _fetchData(categoryType, searchText: "");
+      _fetchData(categoryType, searchText: null);
     });
   }
 
@@ -43,7 +43,7 @@ class CategoriesPageState extends State<CategoriesPage> {
       _setIsLoadingTrue();
     });
 
-    var response = await GetData.getData(searchText);
+    var response = await GetData.getData(searchText, categoryType);
     if (response.statusCode == 200) {
       itemsList = (json.decode(response.body) as List)
           .map((data) => new categoryItemWidget.Items.fromJson(data))
@@ -76,24 +76,28 @@ class CategoriesPageState extends State<CategoriesPage> {
     //print(itemsList[0].itemName + " CategoriesPage build method meeeeeeeeehn");
     return new Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : GridView.builder(
-                itemCount: itemsList.length,
-                //gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
-                gridDelegate:
-                    MediaQuery.of(context).orientation == Orientation.portrait
-                        ? new SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2)
-                        : new SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                itemBuilder: (BuildContext context, int index) {
-                  return new categoryItemWidget.CategoryItem(itemsList[index]);
-                  //TODO: chek if itemList[index].categoryTpe equal to the categoryType field
-                  //TODo: If yes then return an item a new item_category widget if no skip
-                })
+        body: new Container(
+          padding: EdgeInsets.only(top: 8.0),
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : GridView.builder(
+                  itemCount: itemsList.length,
+                  //gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
+                  gridDelegate:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? new SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2)
+                          : new SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
+                  itemBuilder: (BuildContext context, int index) {
+                    return new categoryItemWidget.CategoryItem(
+                        itemsList[index]);
+                    //TODO: chek if itemList[index].categoryTpe equal to the categoryType field
+                    //TODo: If yes then return an item a new item_category widget if no skip
+                  }),
+        )
         //),
         );
   }

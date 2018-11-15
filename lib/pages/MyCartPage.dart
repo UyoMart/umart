@@ -16,7 +16,7 @@ class MyCartPageState extends State<MyCartPage> {
   MyCartPageState() {
     _initList();
     text = new Text(
-      "Pay #" + _totalItemsInCartPrice().toString(),
+      "Pay ₦" + _totalItemsInCartPrice().toString(),
       style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
     );
     _getMyCartItemsList();
@@ -72,7 +72,7 @@ class MyCartPageState extends State<MyCartPage> {
   Widget build(BuildContext context) {
     //_initList(this);
     text = new Text(
-      "Pay #" + _totalItemsInCartPrice().toString(),
+      "Pay ₦" + _totalItemsInCartPrice().toString(),
       style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
     );
     return new Scaffold(
@@ -128,7 +128,7 @@ class MyCartPageState extends State<MyCartPage> {
       child: new RaisedButton(
         onPressed: _onCheckOutButtonClicked,
         color: Colors.grey[300],
-        highlightColor: Colors.deepPurpleAccent,
+        highlightColor: Colors.brown[400],
         shape: new RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0)),
         child: new Text(buttonText),
@@ -181,11 +181,8 @@ class MyCartPageState extends State<MyCartPage> {
 
   void _updateTotalWhenItemRemoved() {
     setState(() {
-      text = new Text("Pay #" + _totalItemsInCartPrice().toString(),
+      text = new Text("Pay ₦" + _totalItemsInCartPrice().toString(),
           style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold));
-      print("Total when item removed " + _totalItemsInCartPrice().toString());
-      print("Cart widget list " + cartList.toSet().toString());
-      print("Cart Item list " + listOfMyCart.toSet().toString());
     });
   }
 
@@ -198,7 +195,7 @@ class MyCartPageState extends State<MyCartPage> {
           .itemCount = myCartVal.itemCount;
       print("List of mycart prices == " + _getListOfPricesInCart().toString());
       text = new Text(
-        "Pay #" + _totalItemsInCartPrice().toString(),
+        "Pay ₦" + _totalItemsInCartPrice().toString(),
         style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
       );
     });
