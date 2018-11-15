@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:umart/auth.dart';
-import 'package:umart/live_shopping_scan_page.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -36,8 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void openScanScreen(){
-
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LiveShopping()));
+    //Navigator.push(context, MaterialPageRoute(builder: (context) => LiveShopping()));
   }
 
   @override
