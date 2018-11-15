@@ -11,6 +11,23 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
+//configurations {
+//    all*.exclude group: 'com.android.support', module: 'support-v4'
+//}
+
+//configurations.all {
+//    resolutionStrategy {
+//
+//        force 'com.google.android.gms:play-services-stats:16.0.3'
+//        force 'com.google.android.gms:play-services-ads-identifier:16.0.3'
+//        force 'com.google.android.gms:play-services-base:16.0.3'
+//        force 'com.google.android.gms:play-services-tasks:16.0.3'
+//        force 'com.google.android.gms:play-services-basement:16.0.3'
+//        force 'com.google.android.gms:play-services-measurement-base:16.0.3'
+//
+//    }
+//}
+
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -21,13 +38,16 @@ android {
         disable 'InvalidPackage'
     }
 
+
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.nexdev.enyason.umart"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+//        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,6 +69,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:support-v4:27.1.1'
+//    implementation 'com.android.support:multidex:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

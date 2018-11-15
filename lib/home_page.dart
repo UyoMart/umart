@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:umart/auth.dart';
 import 'package:umart/live_shopping_scan_page.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -11,11 +14,15 @@ class HomePage extends StatefulWidget {
 
   HomePage({this.auth, this.callBackSignOut});
 
+
   @override
   _HomePageState createState() => new _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+//  StreamSubscription<DocumentSnapshot> subscription;
 
   String id;
 
@@ -28,6 +35,21 @@ class _HomePageState extends State<HomePage> {
         id = onValue;
       });
     });
+
+
+//    subscription = Firestore.
+//    instance
+//        .
+//    document("users/${id}").snapshots().listen((onData) {
+//
+//      if(onData.exists){
+//        // do  something
+//
+//      }
+//
+//    });
+
+
   }
 
   void logOut() async {
@@ -35,9 +57,20 @@ class _HomePageState extends State<HomePage> {
     widget.callBackSignOut();
   }
 
-  void openScanScreen(){
+  void openScanScreen() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => LiveShopping()
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LiveShopping()));
+        )
+    );
+  }
+
+  createUser() {
+    Map<String, dynamic> user
+    = <String, dynamic>{
+      "user": "enyason", "cart_count": 9};
+
+//    Firestore.instance.document("users/${id}").setData(user);
   }
 
   @override
@@ -49,7 +82,8 @@ class _HomePageState extends State<HomePage> {
             child: new Column(
               children: <Widget>[
                 new Text("Welcome $id"),
-                new RaisedButton(onPressed: openScanScreen,child: new Text("live shopping"),),
+                new RaisedButton(
+                  onPressed: createUser, child: new Text("create new user"),),
                 new RaisedButton(onPressed: logOut, child: new Text("Log Out"),)
               ],
             )
