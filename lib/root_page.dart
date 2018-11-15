@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:umart/home_page.dart';
-import 'package:umart/login_page.dart';
 import 'package:umart/auth.dart';
+import 'package:umart/login_page.dart';
+import 'package:umart/pages/HomePage.dart';
 
 enum AuthStatus {
   signedIn,
@@ -22,10 +22,11 @@ class _RootPageState extends State<RootPage> {
   AuthStatus _authStatus = AuthStatus.notSignedIn;
   String id;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
-
     widget.auth.getUserId().then((userId) {
       setState(() {
         _authStatus =
@@ -37,6 +38,7 @@ class _RootPageState extends State<RootPage> {
 
   void _sigedIn() {
     setState(() {
+      print("Sign in caleed oooh");
       _authStatus = AuthStatus.signedIn;
     });
   }
@@ -46,6 +48,7 @@ class _RootPageState extends State<RootPage> {
       _authStatus = AuthStatus.notSignedIn;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +61,7 @@ class _RootPageState extends State<RootPage> {
     } else {
       return new Scaffold(
           body: new HomePage(
+            5,
             auth: widget.auth,
             callBackSignOut: _signedOut,
           )
