@@ -10,7 +10,7 @@ class LogInPage extends StatefulWidget {
   final BaseAuth auth;
   final VoidCallback signInCallBack;
 
-  LogInPage({this.auth,this.signInCallBack});
+  LogInPage({this.auth, this.signInCallBack});
 
   @override
   _LogInPageState createState() => new _LogInPageState();
@@ -22,7 +22,8 @@ enum FormType {
   register
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _LogInPageState extends State<LogInPage>
+    with SingleTickerProviderStateMixin {
 
   String _email;
   String _password;
@@ -31,6 +32,9 @@ class _LogInPageState extends State<LogInPage> {
 
 
   FormType _formType = FormType.login;
+
+  AnimationController _iconAnimationController;
+  Animation<double> _iconAnimation;
 
   bool validateInput() {
     final form = formKey.currentState;
@@ -82,23 +86,73 @@ class _LogInPageState extends State<LogInPage> {
 
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _iconAnimationController = new AnimationController(
+        vsync: this,
+        duration: new Duration(milliseconds: 500));
+//
+    _iconAnimation = new CurvedAnimation(
+        parent: _iconAnimationController, curve: Curves.easeOut);
+//
+    _iconAnimation.addListener(() => this.setState(() {}));
+    _iconAnimationController.forward();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
 
-      appBar: new AppBar(
-        title: new Text("UMart"),
-      ),
+//      appBar: new AppBar(
+//        title: new Text("UMart"),
+//      ),
 
-      body: new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Form(
-            key: formKey,
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: buildTextInput() + buildSubmitButtons(),
+      body: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
 
-            )
-        ),
+          new Image(
+            image: new AssetImage("assets/images/sup.jpg"),
+            fit: BoxFit.cover,
+            color: Colors.black54,
+            colorBlendMode: BlendMode.darken,
+
+          ),
+          new Column(
+
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+
+              new FlutterLogo(
+                size: _iconAnimation.value * 100,
+              ),
+
+
+              new Container(
+                padding: EdgeInsets.only(top: 48.0, left: 24.0, right: 24.0),
+                child: new Form(
+                    key: formKey,
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: buildTextInput() + buildSubmitButtons(),
+
+                    )
+                ),
+
+
+              ),
+
+
+            ],
+
+          )
+
+
+        ],
+
       ),
 
     );
@@ -108,7 +162,9 @@ class _LogInPageState extends State<LogInPage> {
   List<Widget> buildTextInput() {
     return [
       new TextFormField(
-        decoration: new InputDecoration(labelText: "Email"),
+        style: new TextStyle(color: Colors.white),
+        decoration: new InputDecoration(
+            labelText: "Email", fillColor: Colors.white),
         validator: (value) =>
         value.isEmpty
             ? "Email cannot be empty"
@@ -116,7 +172,9 @@ class _LogInPageState extends State<LogInPage> {
         onSaved: (value) => _email = value,
       ),
       new TextFormField(
-        decoration: new InputDecoration(labelText: "Password"),
+        style: new TextStyle(color: Colors.white),
+        decoration: new InputDecoration(
+            labelText: "Password", fillColor: Colors.white),
         obscureText: true,
         validator: (value) =>
         value.isEmpty
@@ -137,20 +195,40 @@ class _LogInPageState extends State<LogInPage> {
 
 
         new RaisedButton(
-          onPressed: authenticateUser, child: new Text("Log In"),),
+          onPressed: authenticateUser,
+          child: Text("Log In"),
+          elevation: 8.0,
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(7.0)),
+          ),
+
+
+        ),
 
         new FlatButton(onPressed: goToRegister,
-            child: new Text("Create an Account"))
+            child: new Text(
+              "Create an Account",
+              style: new TextStyle(color: Colors.white),))
 
       ];
     } else {
       return [
 
         new RaisedButton(
-          onPressed: authenticateUser, child: new Text("Register Now"),),
+          onPressed: authenticateUser,
+          child: Text("Register Now"),
+          elevation: 8.0,
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(7.0)),
+          ),
+
+
+        ),
 
         new FlatButton(onPressed: goToLogIn,
-            child: new Text("Already Registered, Log in now"))
+            child: new Text("Already Registered, Log in now",
+              style: new TextStyle(color: Colors.white),)
+        )
 
 
       ];
