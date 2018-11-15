@@ -50,32 +50,6 @@ class _LiveShoppingState extends State<LiveShopping> {
   }
 
 
-//  Future<List<Product>> fetchProducts() async {
-//    final response = await get("https://sheetdb.io/api/v1/5be305749e8e2");
-//
-//    if (response.statusCode == 200) {
-//      //server returns ok
-//      var list = json.decode(response.body);
-//      List<Product> products ;
-//
-//      for (var i in list) {
-//        products.add(Product.fromJson(i));
-//      }
-//
-//      return products;
-////      print("size ${products.length}");
-////      return Product.fromJson(json.decode(response.body));
-//    } else {
-//      // If that response was not OK, throw an error.
-//      throw Exception('Failed to load post');
-//    }
-////     .then((onValue){
-////
-////
-////       print("Response :${onValue.body}");
-////     });
-//
-//  }
 
   fetchProduct(String id) async {
     final response = await get(
