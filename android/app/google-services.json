@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "947359366511",
+    "firebase_url": "https://umart-25fad.firebaseio.com",
+    "project_id": "umart-25fad",
+    "storage_bucket": "umart-25fad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947359366511:android:5e9f1c37cc01062b",
+        "android_client_info": {
+          "package_name": "com.nexdev.enyason.umart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947359366511-ho8chaggl93bsqj84oclgn6pet2ml3ee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqgwJ1hIbofwHeP0Im17PkXvS5BWs_jSg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

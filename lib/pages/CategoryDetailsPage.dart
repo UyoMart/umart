@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umart/Items/item_cart_count_indicator.dart';
 import 'package:umart/Items/items_category.dart';
+import 'package:umart/Utility/colors.dart';
 import 'package:umart/pages/MyCartPage.dart';
 
 class CategoryDetailsPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
         floatingActionButton: new FloatingActionButton(
           onPressed: _onAddToCartFabClicked,
           child: new Icon(Icons.add_shopping_cart),
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: getColorAccent(),
         ),
         //TODO: Take care of orientation change
         body: MediaQuery.of(context).orientation == Orientation.portrait

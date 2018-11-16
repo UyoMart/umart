@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umart/Items/item_cart_count_indicator.dart';
+import 'package:umart/Utility/colors.dart';
 import 'package:umart/auth.dart';
 import 'package:umart/login_background.dart';
 import 'package:umart/pages/live_shopping_scan_page.dart';
@@ -55,7 +56,7 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       appBar: new AppBar(
-        backgroundColor: Colors.brown,
+        backgroundColor: getPrimaryColor(),
         title: appBarTitle,
         bottom: _getSearchBar(),
         actions: <Widget>[
@@ -265,7 +266,7 @@ class HomePageState extends State<HomePage> {
     return new PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: new Container(
-          color: Colors.brown,
+          color: getPrimaryColor(),
           height: 60.0,
           alignment: Alignment.center,
           margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),

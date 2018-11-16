@@ -125,7 +125,7 @@ class Items {
         itemId: json['id'],
         itemDescrption: json['description'] == null
             ? json['description']
-            : "This is the product decription, as you can see, now get back",
+            : "This is the product decription page",
         categoryType: json['category']);
   }
 }
