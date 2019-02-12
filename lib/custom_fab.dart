@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umart/Utility/colors.dart';
 
 class CustomFab extends StatefulWidget {
   final Function() onPressed;
@@ -35,8 +36,7 @@ class _CustomFabState extends State<CustomFab>
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _animateColor =
-        ColorTween(begin: Colors.deepPurple, end: Colors.deepPurpleAccent)
-            .animate(
+        ColorTween(begin: getPrimaryColor(), end: getColorAccent()).animate(
       CurvedAnimation(
           parent: _animationController,
           curve: Interval(0.00, 1.00,
@@ -85,7 +85,7 @@ class _CustomFabState extends State<CustomFab>
     return new Container(
       child: new FloatingActionButton(
         heroTag: "scan_barcode",
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: getColorAccent(),
         onPressed: _onScanWithBarcodeClicked,
         tooltip: "Scan With Barcode",
         child: new Icon(
@@ -101,7 +101,7 @@ class _CustomFabState extends State<CustomFab>
     return new Container(
       child: new FloatingActionButton(
         heroTag: "Add_to_cart",
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: getColorAccent(),
         onPressed: _onAddToCartClicked,
         tooltip: "Add To Cart",
         child: new Icon(
